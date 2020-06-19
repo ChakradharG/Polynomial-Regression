@@ -19,9 +19,6 @@ public:
 
 	double sum(){
 		double s = 0;
-		// for(int i = 0; i < n; i++){
-		// 	s += v[i];
-		// }
 		for (vector<double>::iterator i = v.begin(); i != v.end(); i++){
 			s += *i;
 		}
@@ -68,6 +65,14 @@ public:
 		}
 	}
 
+	Vect operator-(double x){
+		Vect v2;
+		for(int i = 0; i < this->length(); i++){
+			v2.append(v[i] - x);
+		}
+		return v2;
+	}
+
 	Vect operator*(Vect v1){
 		if (this->length() != v1.length()){
 			cout << "Vectors are not equal in length";
@@ -112,7 +117,7 @@ public:
 int main(){
 	const double eps = 1e-6, alp = 0.01;	//Error, Epsilon and Alpha
 	double err = 1, temp;
-	int iter = 0;
+	int iter = 0, epochs = 5000;
 	
 	double w1 = 0, w0 = 0;
 	Vect x, y;
@@ -125,7 +130,7 @@ int main(){
 	yh = ((x*w1) + w0);
 	J.append((((y - yh).square()).sum())/20);
 
-	while (err > eps && iter < 5000){
+	while (err > eps && iter < epochs){
 		double delJ0 = -((y - yh).sum())/10;
 		double delJ1 = -(((x*(y - yh)).sum()))/10;
 
