@@ -18,7 +18,7 @@ public:
 		return v.size();
 	}
 
-	void append(double x){
+	void append(const double& x){
 		v.push_back(x);
 	}
 
@@ -30,7 +30,7 @@ public:
 		return s;
 	}
 
-	void getValues(int n){
+	void getValues(const int& n){
 		double x;
 		for (int i = 0; i < n; i++){
 			cin >> x;
@@ -38,7 +38,7 @@ public:
 		}
 	}
 
-	double operator[](int x){
+	double operator[](const int& x){
 		return v[x];
 	}
 
@@ -56,7 +56,7 @@ public:
 		}
 	}
 
-	Vect operator+(double x){
+	Vect operator+(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
 			v2.append(v[i] + x);
@@ -78,7 +78,7 @@ public:
 		}
 	}
 
-	Vect operator-(double x){
+	Vect operator-(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
 			v2.append(v[i] - x);
@@ -100,7 +100,7 @@ public:
 		}
 	}
 
-	Vect operator*(double x){
+	Vect operator*(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
 			v2.append(v[i] * x);
@@ -108,7 +108,7 @@ public:
 		return v2;
 	}
 
-	Vect operator^(int x){
+	Vect operator^(const int& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
 			v2.append(pow(v[i], x));
@@ -175,8 +175,8 @@ int main(){
 
 		J.append(((y - yh)^2).sum()/(2*denom));
 		err = J[iter] - J[iter-1];
-		if (err > 0){	//^
-			alp /= 2;
+		if (err > 0){
+			alp /= 2;	//^
 		}
 		err = (err < 0) ? -err : err;
 
