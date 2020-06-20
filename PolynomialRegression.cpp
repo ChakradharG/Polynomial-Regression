@@ -12,6 +12,7 @@ using namespace std;
 
 class Vect{
 	vector<double> v;
+	double temp;
 
 public:
 	int length(){
@@ -23,18 +24,17 @@ public:
 	}
 
 	double sum(){
-		double s = 0;
+		temp = 0;
 		for (int i = 0; i < this->length(); i++){
-			s += v[i];
+			temp += v[i];
 		}
-		return s;
+		return temp;
 	}
 
 	void getValues(const int& n){
-		double x;
 		for (int i = 0; i < n; i++){
-			cin >> x;
-			v.push_back(x);
+			cin >> temp;
+			v.push_back(temp);
 		}
 	}
 
