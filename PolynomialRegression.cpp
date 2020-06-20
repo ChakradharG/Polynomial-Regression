@@ -116,12 +116,12 @@ public:
 		return v2;
 	}
 
-	void disp(){
-		for (int i = 0; i < this->length(); i++){
-			cout << v[i] << " ";
-		}
-		cout << "\n";
-	}
+	// void disp(){
+	// 	for (int i = 0; i < this->length(); i++){
+	// 		cout << v[i] << " ";
+	// 	}
+	// 	cout << "\n";
+	// }
 
 };
 
@@ -144,7 +144,7 @@ int main(){
 	cin >> order;
 	order++;
 
-	// cout << "Learning rate? ";
+	// cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
 	// cin >> alp;
 
 	double* W = new double[order];	//Weight matrix
@@ -175,7 +175,7 @@ int main(){
 
 		J.append(((y - yh)^2).sum()/(2*denom));
 		err = J[iter] - J[iter-1];
-		if (err > 0){
+		if (err > 0){	//^
 			alp /= 2;
 		}
 		err = (err < 0) ? -err : err;
