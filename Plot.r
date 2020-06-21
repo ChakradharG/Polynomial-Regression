@@ -8,4 +8,4 @@ plot(dataPts$X, dataPts$Y,
 lines(dataPts$X, dataPts$Yh, col='red')
 
 l <- c('Ground truth', 'Hypothesis')
-legend('bottomright', legend=l, col=c('blue', 'red'), pch=)
+legend('bottomright', legend=l, col=c('blue', 'red'), pch=16)
