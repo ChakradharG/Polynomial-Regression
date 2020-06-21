@@ -19,4 +19,4 @@ The code calculates the learning rate depending upon the order of the output pol
 
 ## How to run
 1. Change the Input.txt file according to the desired data set
-2. Simply compile PolynomialRegression.cpp and execute run.bat
+2. Simply compile PolynomialRegression.cpp and execute Run.bat
