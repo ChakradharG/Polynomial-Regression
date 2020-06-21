@@ -1,4 +1,4 @@
-setwd('C:/Users/DG/Documents/Stuff/C++ Codes/Polynomial-Regression')
+setwd('Working-directory')
 dataPts <- read.csv('Output.csv')
 
 plot(dataPts$X, dataPts$Y, 

@@ -1,2 +1,2 @@
 a.exe
-Plot.r
+"Rscript.exe" Plot.r
