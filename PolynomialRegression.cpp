@@ -144,8 +144,8 @@ int main(){
 	cin >> order;
 	order++;
 
-	// cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
-	// cin >> alp;
+	cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
+	cin >> alp;
 
 	double* W = new double[order];	//Weight matrix
 	double* delJ = new double[order];	//Partial derivatives of J
