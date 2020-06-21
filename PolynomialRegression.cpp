@@ -127,9 +127,9 @@ public:
 
 
 int main(){
-	double err = 1, eps = 1e-6, alp;	//^eps=stopping criterion epsilon, alp=learning rate alpha
+	double err = 1, eps = 1e-6, alp;	//^eps = stopping criterion epsilon, alp = learning rate alpha
 	int iter = 0, order, len, denom, epochs = 10000;	//^
-	Vect x, y, yh, J;	//Data, ground truth, hypothesis function, loss function
+	Vect x, y, yh, J;	//x,y = data points, yh = hypothesis function, J = loss function
 
 	// cout << "Length of the vector? ";
 	cin >> len;
@@ -145,7 +145,7 @@ int main(){
 	alp = 5 * pow(10, -order);
 	order++;
 
-	// cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
+	// cout << "Learning rate? ";	//Uncomment to give custom learning rate at runtime
 	// cin >> alp;
 
 	double* W = new double[order];	//Weight matrix
