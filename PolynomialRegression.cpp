@@ -15,7 +15,7 @@ class Vect{
 	double temp;
 
 public:
-	int length(){
+	inline int length(){
 		return v.size();
 	}
 
@@ -116,36 +116,37 @@ public:
 		return v2;
 	}
 
-	// void disp(){
-	// 	for (int i = 0; i < this->length(); i++){
-	// 		cout << v[i] << " ";
-	// 	}
-	// 	cout << "\n";
-	// }
+	void disp(){
+		for (int i = 0; i < this->length(); i++){
+			cout << v[i] << " ";
+		}
+		cout << "\n";
+	}
 
 };
 
 
 int main(){
-	double err = 1, eps = 1e-6, alp = 0.5;	//^eps=stopping criterion epsilon, alp=learning rate alpha
+	double err = 1, eps = 1e-6, alp;	//^eps=stopping criterion epsilon, alp=learning rate alpha
 	int iter = 0, order, len, denom, epochs = 10000;	//^
 	Vect x, y, yh, J;	//Data, ground truth, hypothesis function, loss function
 
-	cout << "Length of the vector? ";
+	// cout << "Length of the vector? ";
 	cin >> len;
 	denom = 10 * len;	//^
 
-	cout << "x: ";
+	// cout << "x: ";
 	x.getValues(len);
-	cout << "y: ";
+	// cout << "y: ";
 	y.getValues(len);
 
-	cout << "Order of the output polynomial? ";
+	// cout << "Order of the output polynomial? ";
 	cin >> order;
+	alp = 5 * pow(10, -order);
 	order++;
 
-	cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
-	cin >> alp;
+	// cout << "Learning rate? ";	//Uncomment to get custom alpha at runtime
+	// cin >> alp;
 
 	double* W = new double[order];	//Weight matrix
 	double* delJ = new double[order];	//Partial derivatives of J
@@ -182,7 +183,11 @@ int main(){
 
 	}
 
-	// cout << "\n" << err << " " << iter;
+	// cout << "\n" << err << " " << iter << "\n";
+
+	x.disp();
+	y.disp();
+	yh.disp();
 
 	// cout << "\nCoefficients: ";
 	for (int i = order-1; i >= 0; i--){
