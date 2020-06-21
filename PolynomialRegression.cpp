@@ -127,7 +127,7 @@ public:
 };
 
 
-void readData(int&, Vect&, Vect&, int&);
+void readData(int&, Vect&, Vect&, int&, double&);
 void writeData(Vect&, Vect&, Vect&, int&);
 
 
@@ -211,7 +211,7 @@ int main(){
 }
 
 
-void readData(int& len, Vect& x, Vect& y, int& order){
+void readData(int& len, Vect& x, Vect& y, int& order, double& alp){
 	ifstream input;
 	input.open("Input.txt");
 
@@ -219,6 +219,7 @@ void readData(int& len, Vect& x, Vect& y, int& order){
 	x.getValues(input, len);
 	y.getValues(input, len);
 	input >> order;
+	// input >> alp;	//Uncomment to give custom learning rate at runtime
 
 	input.close();
 }
