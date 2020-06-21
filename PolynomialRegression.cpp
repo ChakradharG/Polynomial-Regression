@@ -1,8 +1,9 @@
 /*
-Values in lines containing '//^' can be tweaked according
+Values in lines containing '//^' can be tweaked
 in order to get a more accurate output.
 */
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cmath>
 #include <time.h>
@@ -31,9 +32,9 @@ public:
 		return temp;
 	}
 
-	void getValues(const int& n){
+	void getValues(istream& stream, const int& n){
 		for (int i = 0; i < n; i++){
-			cin >> temp;
+			stream >> temp;
 			v.push_back(temp);
 		}
 	}
@@ -126,27 +127,35 @@ public:
 };
 
 
+void readData(int&, Vect&, Vect&, int&);
+void writeData(Vect&, Vect&, Vect&, int&);
+
+
 int main(){
 	double err = 1, eps = 1e-6, alp;	//^eps = stopping criterion epsilon, alp = learning rate alpha
 	int iter = 0, order, len, denom, epochs = 10000;	//^
 	Vect x, y, yh, J;	//x,y = data points, yh = hypothesis function, J = loss function
 
+	readData(len, x, y, order);
+
+	/*This block is to get the inputs from the terminal (user)*/
 	// cout << "Length of the vector? ";
-	cin >> len;
-	denom = 10 * len;	//^
+	// cin >> len;
 
 	// cout << "x: ";
-	x.getValues(len);
+	// x.getValues(cin, len);
 	// cout << "y: ";
-	y.getValues(len);
+	// y.getValues(cin, len);
 
 	// cout << "Order of the output polynomial? ";
-	cin >> order;
-	alp = 5 * pow(10, -order);
-	order++;
+	// cin >> order;
 
 	// cout << "Learning rate? ";	//Uncomment to give custom learning rate at runtime
 	// cin >> alp;
+
+	denom = 10 * len;	//^
+	alp = 5 * pow(10, -order);
+	order++;
 
 	double* W = new double[order];	//Weight matrix
 	double* delJ = new double[order];	//Partial derivatives of J
@@ -183,17 +192,47 @@ int main(){
 
 	}
 
+	writeData(x, y, yh, len);
+
+	/*This block is to print the output to the terminal*/
 	// cout << "\n" << err << " " << iter << "\n";
 
-	x.disp();
-	y.disp();
-	yh.disp();
+	// x.disp();
+	// y.disp();
+	// yh.disp();
 
 	// cout << "\nCoefficients: ";
-	for (int i = order-1; i >= 0; i--){
-		cout << W[i] << " ";
-	}
+	// for (int i = order-1; i >= 0; i--){
+	// 	cout << W[i] << " ";
+	// }
 
 	delete[] W;
 	delete[] delJ;
+}
+
+
+void readData(int& len, Vect& x, Vect& y, int& order){
+	ifstream input;
+	input.open("Input.txt");
+
+	input >> len;
+	x.getValues(input, len);
+	y.getValues(input, len);
+	input >> order;
+
+	input.close();
+}
+
+
+void writeData(Vect& x, Vect& y, Vect& yh, int& len){
+	ofstream output;
+	output.open("Output.csv");
+
+	output << "X, Y, Yh\n";
+	for (int i = 0; i < len; i++){
+		output << x[i] << ", " << y[i] << ", " << yh[i] << "\n";
+	}
+
+
+	output.close();
 }
