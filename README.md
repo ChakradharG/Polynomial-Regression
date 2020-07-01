@@ -22,3 +22,8 @@ The code can handle both, inputs & outputs in terminal and from files.
 2. Change the working directory in Plot.r
 3. Make sure Rscript.exe is added to PATH or else provide absolute path in Run.bat
 4. Compile PolynomialRegression.cpp and execute Run.bat
+
+<br>
+
+## Example Output
+![](Rplot.png)
