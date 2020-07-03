@@ -136,7 +136,7 @@ int main(){
 	int iter = 0, order, len, denom, epochs = 10000;	//^
 	Vect x, y, yh, J;	//x,y = data points, yh = hypothesis function, J = loss function
 
-	readData(len, x, y, order);
+	readData(len, x, y, order, alp);
 
 	/*This block is to get the inputs from the terminal (user)*/
 	// cout << "Length of the vector? ";
@@ -154,7 +154,7 @@ int main(){
 	// cin >> alp;
 
 	denom = 10 * len;	//^
-	alp = 5 * pow(10, -order);
+	alp = 5 * pow(10, -order);	//Comment to give custom learning rate at runtime
 	order++;
 
 	double* W = new double[order];	//Weight matrix
