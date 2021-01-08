@@ -1,3 +1,3 @@
 Main.exe
-"Rscript.exe" Plot.r
+Rscript Plot.r
 Rplots.pdf
