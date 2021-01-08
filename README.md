@@ -12,7 +12,7 @@ The code calculates the learning rate depending upon the order of the output pol
 <br>
 
 ## How to Use
-* Change the ```Input.txt``` file according to the desired data set (Refer to the [format](/README.md/#format-of-input.txt) section)
+* Change the ```Input.txt``` file according to the desired data set (Refer to the format section)
 * Make sure ```Rscript.exe``` is added to PATH or else provide absolute path in ```Fit.bat```
 * Run ```Fit.bat```
 
