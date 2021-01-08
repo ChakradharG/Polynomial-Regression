@@ -26,4 +26,4 @@ The code can handle both, inputs & outputs in terminal and from files.
 <br>
 
 ## Example Output
-![](Rplot.png)
+![](Example/Rplot.png)
