@@ -1,4 +1,3 @@
-setwd('Working-directory')
 dataPts <- read.csv('Output.csv')
 
 plot(dataPts$X, dataPts$Y, 
