@@ -6,7 +6,8 @@ The code calculates the learning rate depending upon the order of the output pol
 
 ## Getting Started
 * Clone this repository
-* Compile ```PolynomialRegression.cpp``` (g++ ```PolynomialRegression.cpp``` -o ```Main.exe```)
+* ```cd Polynomial-Regression```
+* Compile ```PolynomialRegression.cpp``` (```g++ PolynomialRegression.cpp -o Main.exe```)
 * Run ```Fit.bat```
 
 <br>
