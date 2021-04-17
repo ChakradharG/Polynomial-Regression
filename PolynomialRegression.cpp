@@ -5,6 +5,7 @@ in order to get a more accurate output.
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <array>
 #include <cmath>
 #include <time.h>
 #include <chrono>
@@ -13,16 +14,13 @@ using namespace std;
 
 
 class Vect{
-	vector<double> v;
+	array<double, 10> v;
+	int len = 10;
 	double temp;
 
 public:
 	inline int length(){
-		return v.size();
-	}
-
-	void append(const double& x){
-		v.push_back(x);
+		return len;
 	}
 
 	double sum(){
@@ -36,7 +34,7 @@ public:
 	void getValues(istream& stream, const int& n){
 		for (int i = 0; i < n; i++){
 			stream >> temp;
-			v.push_back(temp);
+			v[i] = temp;
 		}
 	}
 
@@ -52,7 +50,7 @@ public:
 		else{
 			Vect v2;
 			for (int i = 0; i < this->length(); i++){
-				v2.append(v[i] + v1[i]);
+				v2[i] = v[i] + v1[i];
 			}
 			return v2;
 		}
@@ -61,7 +59,7 @@ public:
 	Vect operator+(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
-			v2.append(v[i] + x);
+			v2[i] = v[i] + x;
 		}
 		return v2;
 	}
@@ -74,7 +72,7 @@ public:
 		else{
 			Vect v2;
 			for (int i = 0; i < this->length(); i++){
-				v2.append(v[i] - v1[i]);
+				v2[i] = v[i] - v1[i];
 			}
 			return v2;
 		}
@@ -83,7 +81,7 @@ public:
 	Vect operator-(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
-			v2.append(v[i] - x);
+			v2[i] = v[i] - x;
 		}
 		return v2;
 	}
@@ -96,7 +94,7 @@ public:
 		else{
 			Vect v2;
 			for(int i = 0; i < this->length(); i++){
-				v2.append(v[i] * v1[i]);
+				v2[i] = v[i] * v1[i];
 			}
 			return v2;
 		}
@@ -105,7 +103,7 @@ public:
 	Vect operator*(const double& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
-			v2.append(v[i] * x);
+			v2[i] = v[i] * x;
 		}
 		return v2;
 	}
@@ -113,7 +111,7 @@ public:
 	Vect operator^(const int& x){
 		Vect v2;
 		for (int i = 0; i < this->length(); i++){
-			v2.append(pow(v[i], x));
+			v2[i] = pow(v[i], x);
 		}
 		return v2;
 	}
@@ -123,6 +121,10 @@ public:
 			cout << v[i] << " ";
 		}
 		cout << "\n";
+	}
+
+	double& operator[] (int& index){
+		return v[index];
 	}
 
 };
@@ -141,7 +143,8 @@ int main(){
 	auto t0 = chrono::high_resolution_clock::now();
 	double err = 1, eps = 1e-6, alp;	//^eps = stopping criterion epsilon, alp = learning rate alpha
 	int iter = 0, order, len, denom, epochs = 10000;	//^
-	Vect x, y, yh, J;	//x,y = data points, yh = hypothesis function, J = loss function
+	Vect x, y, yh;
+	vector<double> J;	//x,y = data points, yh = hypothesis function, J = loss function
 	auto t1 = chrono::high_resolution_clock::now();
 
 	readData(len, x, y, order, alp);
@@ -180,7 +183,7 @@ int main(){
 		yh = yh + (x^i) * W[i];
 	}
 	
-	J.append(((y - yh)^2).sum()/(2*len));
+	J.push_back(((y - yh)^2).sum()/(2*len));
 
 	auto t5 = chrono::high_resolution_clock::now();
 	while (err > eps && iter < epochs){
@@ -195,7 +198,7 @@ int main(){
 			yh = yh +  (x^i) * W[i];
 		}
 
-		J.append(((y - yh)^2).sum()/(2*denom));
+		J.push_back(((y - yh)^2).sum()/(2*denom));
 		err = J[iter] - J[iter-1];
 		if (err > 0){
 			alp /= 2;	//^
@@ -213,7 +216,7 @@ int main(){
 	elapsedTime(t5, t6, "Bulk: ");
 	elapsedTime(t0, t6, "\nTotal: ");
 
-	// writeData(x, y, yh, len);
+	writeData(x, y, yh, len);
 
 	/*This block is to print the output to the terminal*/
 	// cout << "\n" << err << " " << iter << "\n";
