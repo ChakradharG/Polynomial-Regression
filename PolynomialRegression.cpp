@@ -29,6 +29,7 @@ int main(){
 	auto t1 = chrono::high_resolution_clock::now();
 
 	readData(len, x, y, order, alp);
+	yh.initialize(len);
 	auto t2 = chrono::high_resolution_clock::now();
 
 	/*This block is to get the inputs from the terminal (user)*/
@@ -63,7 +64,7 @@ int main(){
 	for (int i = 1; i < order; i++){
 		yh = yh + (x^i) * W[i];
 	}
-	
+
 	J.push_back(((y - yh)^2).sum()/(2*len));
 
 	auto t5 = chrono::high_resolution_clock::now();
@@ -76,7 +77,7 @@ int main(){
 		iter++;
 		yh = (x^0) * W[0];
 		for (int i = 1; i < order; i++){
-			yh = yh +  (x^i) * W[i];
+			yh = yh + (x^i) * W[i];
 		}
 
 		J.push_back(((y - yh)^2).sum()/(2*denom));
@@ -121,7 +122,9 @@ void readData(int& len, Vect& x, Vect& y, int& order, double& alp){
 	input.open("Input.txt");
 
 	input >> len;
+	x.initialize(len);
 	x.getValues(input, len);
+	y.initialize(len);
 	y.getValues(input, len);
 	input >> order;
 	// input >> alp;	//Uncomment to give custom learning rate at runtime
