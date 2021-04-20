@@ -11,7 +11,10 @@ public:
 	int length;
 
 	// ~Vect(){
+	// 	auto t0 = std::chrono::high_resolution_clock::now();
 	// 	delete[] v;
+	// 	auto t1 = std::chrono::high_resolution_clock::now();
+	// 	dur += (t1 - t0);
 	// }
 
 	void initialize(const int& length){
@@ -21,7 +24,7 @@ public:
 
 	double sum(){
 		temp = 0;
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			temp += v[i];
 		}
 		return temp;
@@ -39,14 +42,14 @@ public:
 	}
 
 	Vect operator+(Vect v1){
-		if (this->length != v1.length){
+		if (length != v1.length){
 			std::cout << "Vectors are not equal in length";
 			exit(1);
 		}
 		else{
 			Vect v2;
 			v2.initialize(length);
-			for (int i = 0; i < this->length; i++){
+			for (int i = 0; i < length; i++){
 				v2[i] = v[i] + v1[i];
 			}
 			return v2;
@@ -56,21 +59,21 @@ public:
 	Vect operator+(const double& x){
 		Vect v2;
 		v2.initialize(length);
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			v2[i] = v[i] + x;
 		}
 		return v2;
 	}
 
 	Vect operator-(Vect v1){
-		if (this->length != v1.length){
+		if (length != v1.length){
 			std::cout << "Vectors are not equal in length";
 			exit(1);
 		}
 		else{
 			Vect v2;
 			v2.initialize(length);
-			for (int i = 0; i < this->length; i++){
+			for (int i = 0; i < length; i++){
 				v2[i] = v[i] - v1[i];
 			}
 			return v2;
@@ -80,21 +83,21 @@ public:
 	Vect operator-(const double& x){
 		Vect v2;
 		v2.initialize(length);
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			v2[i] = v[i] - x;
 		}
 		return v2;
 	}
 
 	Vect operator*(Vect v1){
-		if (this->length != v1.length){
+		if (length != v1.length){
 			std::cout << "Vectors are not equal in length";
 			exit(1);
 		}
 		else{
 			Vect v2;
 			v2.initialize(length);
-			for(int i = 0; i < this->length; i++){
+			for(int i = 0; i < length; i++){
 				v2[i] = v[i] * v1[i];
 			}
 			return v2;
@@ -104,7 +107,7 @@ public:
 	Vect operator*(const double& x){
 		Vect v2;
 		v2.initialize(length);
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			v2[i] = v[i] * x;
 		}
 		return v2;
@@ -113,17 +116,16 @@ public:
 	Vect operator^(const int& x){
 		Vect v2;
 		v2.initialize(length);
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			v2[i] = pow(v[i], x);
 		}
 		return v2;
 	}
 
 	void disp(){
-		for (int i = 0; i < this->length; i++){
+		for (int i = 0; i < length; i++){
 			std::cout << v[i] << " ";
 		}
 		std::cout << "\n";
 	}
-
 };
