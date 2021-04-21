@@ -106,6 +106,7 @@ int main(){
 	elapsedTime(t0, t6, "\nTotal: ");
 
 	// writeData(x, y, yh, len);
+	yh.d();
 
 	/*This block is to print the output to the terminal*/
 	// cout << "\n" << err << " " << iter << "\n";
