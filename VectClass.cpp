@@ -44,6 +44,20 @@ public:
 		return v[index];
 	}
 
+	void operator=(const Vect& v1){
+		checkLength(length, v1.length);
+
+		for (int i = 0; i < length; i++){
+			v[i] = v1[i];
+		}
+	}
+
+	void operator=(const double& x){
+		for (int i = 0; i < length; i++){
+			v[i] = x;
+		}
+	}
+
 	void operator+=(const Vect& v1){
 		checkLength(length, v1.length);
 
