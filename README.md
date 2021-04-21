@@ -7,17 +7,15 @@ The code calculates the learning rate depending upon the order of the output pol
 ## Getting Started
 * Clone this repository
 * ```cd Polynomial-Regression```
-* Compile ```PolynomialRegression.cpp``` (```g++ PolynomialRegression.cpp -o Main.exe```)
-* Run ```Fit.bat```
+* Compile ```PolynomialRegression.cpp``` (```g++ PolynomialRegression.cpp -o main```)
 
 <br>
 
 ## How to Use
 * Change the ```Input.txt``` file according to the desired data set (Refer to the format section)
-* Make sure ```Rscript.exe``` is added to PATH or else provide absolute path in ```Fit.bat```
-* Run ```Fit.bat```
-
-(Note: If you are not using Windows, you would have to run the commands in ```Fit.bat``` individually in your terminal)
+* Run the executable (```main```)
+* Run ```Plot.r``` (```Rscript Plot.r``` if Rscript is added to PATH)
+* The plot will be saved as ```Rplots.pdf```
 
 <br>
 
