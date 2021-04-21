@@ -1,7 +1,5 @@
 #include <iostream>
-#include <array>
 #include <cmath>
-#include <chrono>
 
 
 void checkLength(const int& l1, const int& l2){
@@ -17,15 +15,9 @@ class Vect{
 
 public:
 	int length;
-	static std::chrono::duration <float> dur;
-	static int cnt;
 
 	~Vect(){
-		cnt--;
-		auto t0 = std::chrono::high_resolution_clock::now();
 		delete[] v;
-		auto t1 = std::chrono::high_resolution_clock::now();
-		dur += (t1 - t0);
 	}
 
 	void initialize(const int& length){
@@ -112,12 +104,4 @@ public:
 		}
 		std::cout << "\n";
 	}
-	
-	void d(){
-		std::cout << "\n\nDestructor Time: " << dur.count() * 1000 << " ms";
-		std::cout << "\nObject Count: " << cnt;
-	}
 };
-auto t = std::chrono::high_resolution_clock::now();
-std::chrono::duration <float> Vect::dur = t-t;
-int Vect::cnt = 0;
