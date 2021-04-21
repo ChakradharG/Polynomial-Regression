@@ -61,7 +61,7 @@ int main(){
 	auto t4 = chrono::high_resolution_clock::now();
 
 	// yh = (x^0) * W[0];
-	for (int i = 0; i < 10; i++){
+	for (int i = 0; i < len; i++){
 		yh[i] = W[0];
 	}
 	for (int i = 1; i < order; i++){
@@ -85,7 +85,7 @@ int main(){
 		iter++;
 		yDiff += yh;
 		// yh = (x^0) * W[0];
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < len; i++){
 			yh[i] = W[0];
 		}
 		for (int i = 1; i < order; i++){
