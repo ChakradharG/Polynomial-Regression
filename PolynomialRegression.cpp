@@ -60,27 +60,40 @@ int main(){
 	}
 	auto t4 = chrono::high_resolution_clock::now();
 
-	yh = (x^0) * W[0];
+	// yh = (x^0) * W[0];
+	for (int i = 0; i < 10; i++){
+		yh[i] = W[0];
+	}
 	for (int i = 1; i < order; i++){
-		yh = yh + (x^i) * W[i];
+		yh += (x^i) * W[i];
 	}
 
-	J.push_back(((y - yh)^2).sum()/(2*len));
+	Vect yDiff;
+	yDiff.initialize(len);
+	yDiff = y;
+	yDiff -= yh;
+
+	J.push_back((yDiff^2).sum()/(2*len));
 
 	auto t5 = chrono::high_resolution_clock::now();
 	while (err > eps && iter < epochs){
 		for (int i = 0; i < order; i++){
-			delJ[i] = -(((x^i)*(y - yh)).sum())/denom;
+			delJ[i] = -(((x^i)*yDiff).sum())/denom;
 			W[i] -= alp * delJ[i];
 		}
 
 		iter++;
-		yh = (x^0) * W[0];
-		for (int i = 1; i < order; i++){
-			yh = yh + (x^i) * W[i];
+		yDiff += yh;
+		// yh = (x^0) * W[0];
+		for (int i = 0; i < 10; i++){
+			yh[i] = W[0];
 		}
+		for (int i = 1; i < order; i++){
+			yh += (x^i) * W[i];
+		}
+		yDiff -= yh;
 
-		J.push_back(((y - yh)^2).sum()/(2*denom));
+		J.push_back((yDiff^2).sum()/(2*denom));
 		err = J[iter] - J[iter-1];
 		if (err > 0){
 			alp /= 2;	//^
@@ -98,7 +111,7 @@ int main(){
 	elapsedTime(t5, t6, "Bulk: ");
 	elapsedTime(t0, t6, "\nTotal: ");
 
-	writeData(x, y, yh, len);
+	// writeData(x, y, yh, len);
 
 	/*This block is to print the output to the terminal*/
 	// cout << "\n" << err << " " << iter << "\n";

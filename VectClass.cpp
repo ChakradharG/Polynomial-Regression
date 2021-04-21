@@ -3,6 +3,13 @@
 #include <cmath>
 
 
+void checkLength(const int& l1, const int& l2){
+	if (l1 != l2){
+		std::cout << "Vectors are not equal in length";
+		exit(1);
+	}
+}
+
 class Vect{
 	double* v;
 	double temp;
@@ -10,12 +17,9 @@ class Vect{
 public:
 	int length;
 
-	// ~Vect(){
-	// 	auto t0 = std::chrono::high_resolution_clock::now();
-	// 	delete[] v;
-	// 	auto t1 = std::chrono::high_resolution_clock::now();
-	// 	dur += (t1 - t0);
-	// }
+	~Vect(){
+		delete[] v;
+	}
 
 	void initialize(const int& length){
 		v = new double[length];
@@ -32,85 +36,44 @@ public:
 
 	void getValues(std::istream& stream, const int& n){
 		for (int i = 0; i < n; i++){
-			stream >> temp;
-			v[i] = temp;
+			stream >> v[i];
 		}
 	}
 
-	double& operator[](const int& index){
+	double& operator[](const int& index) const{
 		return v[index];
 	}
 
-	Vect operator+(Vect v1){
-		if (length != v1.length){
-			std::cout << "Vectors are not equal in length";
-			exit(1);
-		}
-		else{
-			Vect v2;
-			v2.initialize(length);
-			for (int i = 0; i < length; i++){
-				v2[i] = v[i] + v1[i];
-			}
-			return v2;
-		}
-	}
+	void operator+=(const Vect& v1){
+		checkLength(length, v1.length);
 
-	Vect operator+(const double& x){
-		Vect v2;
-		v2.initialize(length);
 		for (int i = 0; i < length; i++){
-			v2[i] = v[i] + x;
-		}
-		return v2;
-	}
-
-	Vect operator-(Vect v1){
-		if (length != v1.length){
-			std::cout << "Vectors are not equal in length";
-			exit(1);
-		}
-		else{
-			Vect v2;
-			v2.initialize(length);
-			for (int i = 0; i < length; i++){
-				v2[i] = v[i] - v1[i];
-			}
-			return v2;
+			v[i] += v1[i];
 		}
 	}
 
-	Vect operator-(const double& x){
-		Vect v2;
-		v2.initialize(length);
+	void operator-=(const Vect& v1){
+		checkLength(length, v1.length);
+
 		for (int i = 0; i < length; i++){
-			v2[i] = v[i] - x;
-		}
-		return v2;
-	}
-
-	Vect operator*(Vect v1){
-		if (length != v1.length){
-			std::cout << "Vectors are not equal in length";
-			exit(1);
-		}
-		else{
-			Vect v2;
-			v2.initialize(length);
-			for(int i = 0; i < length; i++){
-				v2[i] = v[i] * v1[i];
-			}
-			return v2;
+			v[i] -= v1[i];
 		}
 	}
 
-	Vect operator*(const double& x){
-		Vect v2;
-		v2.initialize(length);
+	Vect& operator*(const Vect& v1){
+		checkLength(length, v1.length);
+
+		for(int i = 0; i < length; i++){
+			v[i] *= v1[i];
+		}
+		return *this;
+	}
+
+	Vect& operator*(const double& x){
 		for (int i = 0; i < length; i++){
-			v2[i] = v[i] * x;
+			v[i] *= x;
 		}
-		return v2;
+		return *this;
 	}
 
 	Vect operator^(const int& x){
